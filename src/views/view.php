@@ -1,1 +1,5 @@
-NUL is ./NUL
+<?php
+
+interface View{
+	public function render($data);
+}

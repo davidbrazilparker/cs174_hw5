@@ -1,1 +1,5 @@
-NUL is ./NUL
+<?php
+
+class Model{
+	
+}
