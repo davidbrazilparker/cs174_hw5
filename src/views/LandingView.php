@@ -17,116 +17,49 @@ class LandingView implements view{
 	*/
 	
 	function render($data){
+		$lang = "es"; // default
+		if(isset($_POST["lang"])) $lang = $_POST["lang"];
+		echo "lang: $lang\n<br>";
+		
+		$rc = putenv("LANG=$lang");
+		if(!$rc) echo "putenv failed";
+		else echo "putenv: ".$rc;
+		echo "\n<br>";
+		
+		$rc = setlocale(LC_ALL, $lang);
+		if(!$rc) echo "setlocale failed";
+		else echo "setLocale: ".$rc;
+		echo "\n<br>";
+		
+		// Set the text domain as 'messages'
+		$domain = "messages";
+		$rc = bindtextdomain($domain, "./src/locale"); 
+		if(!$rc) echo "bindtextdomain failed";
+		else echo "bindtextdomain: ".$rc;
+		echo "\n<br>";
+		
+		$rc = textdomain($domain);
+		if(!$rc) echo "textdomain failed";
+		else echo "text domain: ".$rc;
+		echo "\n<br>";
+		
 		?>
 		<!DOCTYPE html>
 		<html>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 			<head>
 				<link rel="stylesheet" type="text/css" href="src/styles/style.css">
-				<style>
-					* {box-sizing:border-box}
-					body {font-family: Verdana,sans-serif;margin:0}
-					.mySlides {display:none}
-
-					/* Slideshow container */
-					.slideshow-container {
-					  max-width: 1000px;
-					  position: relative;
-					  margin: auto;
-					}
-
-					/* Next & previous buttons */
-					.prev, .next {
-					  cursor: pointer;
-					  position: absolute;
-					  top: 50%;
-					  width: auto;
-					  padding: 16px;
-					  margin-top: -22px;
-					  color: white;
-					  font-weight: bold;
-					  font-size: 18px;
-					  transition: 0.6s ease;
-					  border-radius: 0 3px 3px 0;
-					}
-
-					/* Position the "next button" to the right */
-					.next {
-					  right: 0;
-					  border-radius: 3px 0 0 3px;
-					}
-
-					/* On hover, add a black background color with a little bit see-through */
-					.prev:hover, .next:hover {
-					  background-color: rgba(0,0,0,0.8);
-					}
-
-					/* Caption text */
-					.text {
-					  color: #f2f2f2;
-					  font-size: 15px;
-					  padding: 8px 12px;
-					  position: absolute;
-					  bottom: 8px;
-					  width: 100%;
-					  text-align: center;
-					}
-
-					/* Number text (1/3 etc) */
-					.numbertext {
-					  color: #f2f2f2;
-					  font-size: 12px;
-					  padding: 8px 12px;
-					  position: absolute;
-					  top: 0;
-					}
-
-					/* The dots/bullets/indicators */
-					.dot {
-					  cursor:pointer;
-					  height: 13px;
-					  width: 13px;
-					  margin: 0 2px;
-					  background-color: #bbb;
-					  border-radius: 50%;
-					  display: inline-block;
-					  transition: background-color 0.6s ease;
-					}
-
-					.active, .dot:hover {
-					  background-color: #717171;
-					}
-
-					/* Fading animation */
-					.fade {
-					  -webkit-animation-name: fade;
-					  -webkit-animation-duration: 1.5s;
-					  animation-name: fade;
-					  animation-duration: 1.5s;
-					}
-
-					@-webkit-keyframes fade {
-					  from {opacity: .4} 
-					  to {opacity: 1}
-					}
-
-					@keyframes fade {
-					  from {opacity: .4} 
-					  to {opacity: 1}
-					}
-
-					/* On smaller screens, decrease text size */
-					@media only screen and (max-width: 300px) {
-					  .prev, .next,.text {font-size: 11px}
-					}
-				</style>
 			</head>
 			<body>
-				<label for="language" value="Language">
-				<select id="language">
-					<option value="English">English</option>
-				</select>
-				<h1>Throw-a-Coin-in-the-Fountain</h1>
+				<form id="main" name="main" method="POST">
+					<label for="lang"><?php echo _("Language").":";?></label>
+					<select id="lang" name="lang" onchange="this.form.submit()">
+						<option value="en" <?php if($lang == "en") echo "selected";?>>English</option>
+						<option value="es" <?php if($lang == "es") echo "selected";?>>Espa&ntildeol</option>
+					</select>
+				</form>
+				
+				<h1><?php echo _("Site Title");?></h1>
 				
 				<div class="slideshow-container">
 
