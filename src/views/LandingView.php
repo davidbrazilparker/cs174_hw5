@@ -16,6 +16,32 @@ class LandingView implements view{
 	* @return null
 	*/
 	function render($data){
+		$lang = "es"; // default
+		if(isset($_POST["lang"])) $lang = $_POST["lang"];
+		echo "lang: $lang\n<br>";
+		
+		$rc = putenv("LANG=$lang");
+		if(!$rc) echo "putenv failed";
+		else echo "putenv: ".$rc;
+		echo "\n<br>";
+		
+		$rc = setlocale(LC_ALL, $lang);
+		if(!$rc) echo "setlocale failed";
+		else echo "setLocale: ".$rc;
+		echo "\n<br>";
+		
+		// Set the text domain as 'messages'
+		$domain = "messages";
+		$rc = bindtextdomain($domain, "./src/locale"); 
+		if(!$rc) echo "bindtextdomain failed";
+		else echo "bindtextdomain: ".$rc;
+		echo "\n<br>";
+		
+		$rc = textdomain($domain);
+		if(!$rc) echo "textdomain failed";
+		else echo "text domain: ".$rc;
+		echo "\n<br>";
+		
 		?>
 		<!DOCTYPE html>
 		<html>
@@ -24,11 +50,15 @@ class LandingView implements view{
 				<link rel="stylesheet" type="text/css" href="src/styles/style.css">
 			</head>
 			<body>
-				<label for="language" value="Language">
-				<select id="language">
-					<option value="English">English</option>
-				</select>
-				<h1>Throw-a-Coin-in-the-Fountain</h1>
+				<form id="main" name="main" method="POST">
+					<label for="lang"><?php echo _("Language").":";?></label>
+					<select id="lang" name="lang" onchange="this.form.submit()">
+						<option value="en" <?php if($lang == "en") echo "selected";?>>English</option>
+						<option value="es" <?php if($lang == "es") echo "selected";?>>Espa&ntildeol</option>
+					</select>
+				</form>
+				
+				<h1><?php echo _("Site Title");?></h1>
 				
 				<div class="slideshow-container">
 

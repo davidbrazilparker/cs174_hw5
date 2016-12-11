@@ -7,4 +7,6 @@ namespace roommates\hw5\models;
 */
 class Model{
 	
+	
+	
 }
