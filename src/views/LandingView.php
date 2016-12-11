@@ -1,8 +1,12 @@
 <?php
+
+namespace roommates\hw5\views;
+require_once 'vendor/autoload.php';
+
 /**
 * This class renders the landing page to the website. 
 */
-class LandingView{
+class LandingView implements view{
 	/**
 	* This function spits out the html for the landing page of the website
 	*

@@ -1,1 +1,3 @@
-NUL is ./NUL
+<?php
+
+

@@ -1,21 +1,28 @@
 <?php
 
-require_once("./src/views/LandingView.php");
+
+namespace roommates\hw5\controllers;
+require_once 'vendor/autoload.php';#("./src/views/LandingView.php");
+use roommates\hw5 as A;
 
 
 /**
-* Controlls the way in which the landing page is rendered 
+* Controls the way in which the landing page is rendered 
 *
 */
-class LandingController {
+class LandingController implements controller{
 
+
+	public function __construct(){
+
+	}
 	/**
-	* Creats a LandingView object and has it render the landing page
+	* Creates a LandingView object and has it render the landing page
 	*
 	* @return null
 	*/
 	function processRequest(){
-		$lV = new LandingView();
+		$lV = new A\views\LandingView();
 		$lV->render(null);
 	}
 }

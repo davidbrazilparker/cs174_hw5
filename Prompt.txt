@@ -10,7 +10,7 @@ Checklist:
 	of the class, all methods need to be documented in a similarly meaningful way and have appropriate @param and @return declarations. 
 (d) Your project should be developed using Composer and classes should be loaded not using requires, but using Composer's autoloader. 
 	The grader will run composer install to generate the autoloader and to load any needed dependencies, so you can submit an empty vendor
-	folder. 
+	folder. ** This should be working for the most part right now **
 (e) PDF generation should be done using setasign/fpdf which should be a dependency required in your composer.json file. 
 (f) Somewhere on your landing page you should let users choose between two different languages, defaulting initially to English, and when 
 	you output text on your website you use gettext to output it in the language currently chosen. 
@@ -29,10 +29,10 @@ Checklist:
 	link should work to get this wish even if subsequent wishes are made.
 
 Abrigded Checklist:
-1. MVA and dir structure
+1. MVA and dir structure (Finished)
 2. All code in classes (except index.php)
 3. phpDoc everywhere
-4. Composer
+4. Composer (Finished for the most part - David)
 5. PDF with setasign/fpdf
 6. Different languages (default En)
 7. Fountain customization
