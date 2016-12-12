@@ -9,6 +9,12 @@ use \roommates\hw5\configs as c;
 * This class is used for handling information needed by view.
 */
 class Model{
+	private $BASE_URL = "localhost";
+	private $SERVERNAME = "localhost";
+	private $USERNAME = "root";
+	private $PASSWORD = null;
+	private $DB = "Hw5";
+	
 	private $mysqli;
 	private $select;
 	private $insert;
@@ -19,14 +25,15 @@ class Model{
 	private $result;
 	
 	function __construct(){ // Singleton
-		$this->mysqli = new \mysqli(\SERVERNAME, \USERNAME, \PASSWORD);
+		
+		$this->mysqli = new \mysqli($this->SERVERNAME, $this->USERNAME, $this->PASSWORD);
 		if ($this->mysqli->connect_error) {
 		   throw new Exception("Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . 
 						$this->mysqli->connect_error .	"<br>You may have forgotten to create the DB. ".
 						"Try running CreateDB.php from the cmd");
 		} 
-		if($this->mysqli->query("use ". \DB) !== TRUE){
-			throw new Exception("Error: " . $this->mysqli->error);
+		if($this->mysqli->query("use ". $this->DB) !== TRUE){
+			throw new \Exception("Error: " . $this->mysqli->error);
 		}
 		
 		if($this->select = $this->mysqli->prepare("SELECT * FROM Wishes WHERE md5 = ?")){
