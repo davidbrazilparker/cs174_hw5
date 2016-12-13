@@ -8,7 +8,7 @@ use roommates\hw5 as A;
 * Controls the way in which the landing page is rendered 
 *
 */
-class LandingController implements controller{
+class ChargeController implements controller{
 
 
 	public function __construct(){}
@@ -18,7 +18,7 @@ class LandingController implements controller{
 	* @return null
 	*/
 	function processRequest(){
-		$lV = new A\views\LandingView();
+		$lV = new A\views\ChargeView();
 		$lV->render(null);
 	}
 }

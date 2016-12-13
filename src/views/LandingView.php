@@ -17,6 +17,13 @@ class LandingView implements view{
 	*/
 	
 	function render($data){
+		// composer hates global variables
+		$stripe = array(
+		  "secret_key"      => "sk_test_BsMjVbSw0xLVRg4q9kQQvR6w",
+		  "publishable_key" => "pk_test_5mgPuSlosQhka2t9cm07sYTC"
+		);
+		\Stripe\Stripe::setApiKey($stripe['secret_key']);
+		
 		$lang = "es"; // default
 		if(isset($_POST["lang"])) $lang = $_POST["lang"];
 		echo "lang: $lang\n<br>";
@@ -121,6 +128,54 @@ class LandingView implements view{
 					  dots[slideIndex-1].className += " active";
 					}
 				</script>
+				
+				<br>
+				<br>
+				
+				<div align="CENTER">
+					<form method="post">
+						<script src="https://checkout.stripe.com/checkout.js" 
+							class="stripe-button"
+							data-key="<?php echo $stripe['publishable_key']; ?>"
+							data-name="Throw a coin"
+							data-image="https://upload.wikimedia.org/wikipedia/commons/5/5e/Assorted_United_States_coins.jpg"
+							data-locale="auto"
+							data-amount="50"
+							data-label="Throw-a-Coin"
+							data-panel-label="Throw {{amount}} Coin"
+							>
+						</script>
+					</form>
+				</div>
+				
+				
+				<div>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+				</div>
 			</body>
 		</html>		
 		<?php

@@ -9,10 +9,13 @@
 			"index.php",
 			"src/controllers/controller.php",
 			"src/controllers/LandingController.php",
+			"src/controllers/ChargeController.php",
 			"src/models/model.php",
 			"src/views/view.php",
 			"src/views/LandingView.php",
-			"src/configs/config.php"
+			"src/views/ChargeView.php",
+			"src/configs/Config.php",
+			"vendor/stripe/lib/"
 		]
 	}
 }

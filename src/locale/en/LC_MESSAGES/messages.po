@@ -21,4 +21,4 @@ msgid "Language"
 msgstr "Language"
 
 msgid "Site Title"
-msgstr "Throw-a-Coin-in-the-Fountain-Pretty-Please"
+msgstr "Throw-a-Coin-in-the-Fountain"
