@@ -55,10 +55,14 @@ class ChargeController implements controller{
 			$mysql = new \roommates\hw5\models\Model();
 			
 			$UserName = $_POST['stripeEmail'];
-			$fountainNum = $_POST['fountainNum'];
 			$wish = $_POST['wishText'];
-			$md5 = md5($UserName . $fountainNum . $wish);
-			$mysql->insert($md5, $UserName, $fountainNum, $wish);
+			$fountainNum = $_POST['fountainNum'];
+			$fountainName = $_POST['fountainName'];
+			$fountainlocation = $_POST['fountainLocation'];
+			
+			
+			$md5 = md5($UserName . $wish . $fountainNum . $fountainName . $fountainLocation );
+			$mysql->insert($md5, $UserName, $wish, $fountainNum, $fountainName, $fountainLocation);
 			$mysql->closeConn();
 			
 			header("Location: ". "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]/?hash=$md5" ."");

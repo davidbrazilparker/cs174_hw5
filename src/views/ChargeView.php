@@ -36,19 +36,19 @@ class ChargeView implements view{
 					$userName = $result["UserName"];
 					
 					$height = 10;
-					$imageNumber = $result["fountain"];
+					$imageNumber = $result["fountainNum"];
 					$source = 'src/resources/fountain_' . $imageNumber . '.jpg';
 					$wish = $result["wish"];
-					$coin = 'coin';
-					$fountain_name = 'fountain_name';
-					$fountain_location = 'fountain_location';#Get from database
+					$user = $result["UserName"];
+					$fountain_name = $result['fountainName'];
+					$fountain_location = $result['fountainLocation'];
 
 					$pdf = new \FPDF();
 					$pdf->AddPage();
 					$pdf->SetFont('Arial','B',16);
 
+					$pdf->Cell(180, 10, $user,0,1,'C');
 					$pdf->Cell(180,10,$wish,0,1,'C');
-					$pdf->Cell(180, 10, $coin,0,1,'C');
 					$pdf->Cell(180, 10, $fountain_name,0,1,'C');
 					$pdf->Image($source,20 ,50);
 

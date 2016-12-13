@@ -28,6 +28,40 @@ class LandingView implements view{
 		if(isset($_POST["lang"])) $lang = $_POST["lang"];
 		// echo "lang: $lang\n<br>";
 		
+		$langs = array(
+			"en" => array(
+				"Language" => "Language",
+				"Title" => "Throw-a-Coin-in-the-Fountain",
+				"Fountain1" => "Fountain One",
+				"Fountain2" => "Fountain Two",
+				"Fountain3" => "Fountain Three",
+				"Wish Text" => "Wish Text",
+				"Fountain Name" => "Fountain Name",
+				"Fountain Location" => "Fountain Locatoion",
+				"Fountain Number" => "Fountain Number",
+				"Email Recipients" => "Email Recipients",
+				"Add Another Email" => "Add Another Email",
+				"Throw a Coin" => "Throw a Coin",
+				"Throw {{amount}} Coin" => "Throw {{amount}} Coin"
+			),
+			"es" => array(
+				"Language" => "Idioma",
+				"Title" => "Tirar-una-Moneda-en-la-Fuente",
+				"Fountain1" => "Fuente Uno",
+				"Fountain2" => "Fuente Dos",
+				"Fountain3" => "Fuente Tres",
+				"Wish Text" => "Texto del Deseo",
+				"Fountain Name" => "Nombre de Fuente",
+				"Fountain Location" => "Ubicación de la Fuente",
+				"Fountain Number" => "Número de Fuente",
+				"Email Recipients" => "Destinatarios de Correo Electrónico",
+				"Add Another Email" => "Añadir Otro Correo Electrónico",
+				"Throw a Coin" => "Tirar una Moneda",
+				"Throw {{amount}} Coin" => "Tirar una Moneda de {{amount}}"
+			)		
+		);
+		
+		
 		$rc = putenv("LANG=$lang");
 		// if(!$rc) echo "putenv failed";
 		// else echo "putenv: ".$rc;
@@ -64,7 +98,7 @@ class LandingView implements view{
 			</head>
 			<body>
 				<form id="main" name="main" method="POST">
-					<label for="lang"><?php echo _("Language").":";?></label>
+					<label for="lang"><?php echo $langs[$lang]["Language"].":";?></label>
 					<select id="lang" name="lang" onchange="this.form.submit()">
 						<option value="en" <?php if($lang == "en") echo "selected";?>>English</option>
 						<option value="es" <?php if($lang == "es") echo "selected";?>>Espa&ntildeol</option>
@@ -78,26 +112,26 @@ class LandingView implements view{
 						<?php
 					}
 				?>
-				<h1><?php echo _("Site Title");?></h1>
+				<h1><?php echo $langs[$lang]["Title"];?></h1>
 				
 				<div class="slideshow-container">
 
 					<div class="mySlides fade">
 					  <div class="numbertext">1 / 3</div>
 					  <img src="src/resources/fountain_1.jpg" style="width:100%">
-					  <div class="text">Fountain One</div>
+					  <div class="text"><?php echo $langs[$lang]["Fountain1"];?></div>
 					</div>
 
 					<div class="mySlides fade">
 					  <div class="numbertext">2 / 3</div>
 					  <img src="src/resources/fountain_2.jpg" style="width:100%">
-					  <div class="text">Fountain Two</div>
+					  <div class="text"><?php echo $langs[$lang]["Fountain2"];?></div>
 					</div>
 
 					<div class="mySlides fade">
 					  <div class="numbertext">3 / 3</div>
 					  <img src="src/resources/fountain_3.jpg" style="width:100%">
-					  <div class="text">Fountain Three</div>
+					  <div class="text"><?php echo $langs[$lang]["Fountain3"];?></div>
 					</div>
 
 					<a class="prev" onclick="plusSlides(-1)">❮</a>
@@ -154,15 +188,20 @@ class LandingView implements view{
 				<br>
 				
 				<div style="text-align: center;">
-				<span>Wish Text</span><br>
-				<textarea form="payButton" name="wishText" rows="15" cols="120" required></textarea><br>
-				<span>Fountain Name</span><br>
-				<textarea form="payButton" name="wishText" rows="1" cols="50" required></textarea><br>
-				<span>Fountain Location</span><br>
-				<textarea form="payButton" name="wishText" rows="1" cols="50" required></textarea><br>
+					<span><?php echo $langs[$lang]["Wish Text"];?></span><br>
+					<textarea form="payButton" name="wishText" rows="15" cols="120" required></textarea><br>
+					
+					<span><?php echo $langs[$lang]["Fountain Name"];?></span><br>
+					<textarea form="payButton" name="fountainName" rows="1" cols="50" required></textarea><br>
+					
+					<span><?php echo $langs[$lang]["Fountain Location"];?></span><br>
+					<textarea form="payButton" name="fountainLocation" rows="1" cols="50" required></textarea><br>
+					
+					<span><?php echo $langs[$lang]["Fountain Number"];?></span><br>
+					<input type="number" form="payButton" name="fountainNum" rows="1" cols="50" required></textarea><br>
 						
 					<div style="display: inline-block; position: relative; right: -15px;">
-						Email Recipients
+						<?php echo $langs[$lang]["Email Recipients"];?>
 						<?php 
 							for($i = 1; $i <= $NumEmails; $i++){
 								echo "<br><input form=\"payButton\" type=\"text\" name=\"emails[$i]\">";
@@ -171,23 +210,23 @@ class LandingView implements view{
 					</div>
 					<input type="submit" form="emailAddSub" name="removeEmail" value="X" style="position:relative; right: -15px;"><br>
 					<form id="emailAddSub" method="POST">
-						<input type="submit" name="addEmail" value="Add Another Email"><br>
+						<input type="submit" name="addEmail" value="<?php echo $langs[$lang]["Add Another Email"];?>"><br>
 						<input type="hidden" name="NumEmails" value="<?php echo $NumEmails;?>">
+						<input type="hidden" name="lang" value="<?php echo $lang;?>">
 					</form>
 					<br>
 					<form method="post" id="payButton">
 						<script src="https://checkout.stripe.com/checkout.js" 
 							class="stripe-button"
 							data-key="<?php echo $stripe['publishable_key']; ?>"
-							data-name="Throw a coin"
+							data-name="<?php echo $langs[$lang]["Throw a Coin"];?>"
 							data-image="https://upload.wikimedia.org/wikipedia/commons/5/5e/Assorted_United_States_coins.jpg"
 							data-locale="auto"
 							data-amount="50"
-							data-label="Throw-a-Coin"
-							data-panel-label="Throw {{amount}} Coin"
+							data-label="<?php echo $langs[$lang]["Throw a Coin"];?>"
+							data-panel-label="<?php echo $langs[$lang]["Throw {{amount}} Coin"];?>"
 							>
 						</script>
-						<input type="hidden" name="fountainNum" value="<?php echo $fN; ?>">
 					</form>
 				</div>
 				

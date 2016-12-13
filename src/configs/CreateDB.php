@@ -24,8 +24,10 @@ if ($mysqli->query($sql) !== TRUE) {
 $sql = "CREATE TABLE IF NOT EXISTS Wishes(".
 		"md5 CHAR(32),".
 		"UserName char(32),".
+		"wish TEXT,".
 		"fountainNum INT,".
-		"wish TEXT".
+		"fountainName TEXT,".
+		"fountainLocation TEXT".
 		")";
 if ($mysqli->query($sql) !== TRUE) {
 	echo "Error creating table: " . $mysqli->error;

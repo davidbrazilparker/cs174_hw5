@@ -20,8 +20,11 @@ class Model{
 	private $insert;
 	private $md5;
 	private $UserName;
-	private $fountainNum;
 	private $wish;
+	private $fountainNum;
+	private $fountainName;
+	private $fountainLocation;
+	
 	private $result;
 	
 	function __construct(){ // Singleton
@@ -40,18 +43,24 @@ class Model{
 			$this->select->bind_param("s", $this->md5);
 			$this->select->bind_result($this->result["md5"], 
 									   $this->result["UserName"], 
-									   $this->result["fountain"], 
-									   $this->result["wish"]);
+									   $this->result["wish"],
+									   $this->result["fountainNum"],
+									   $this->result["fountainName"],
+									   $this->result["fountainLocation"]
+									   );
 		}
 		else{
 			throw new Exception("Failure to prepare SELECT statement");
 		}
 		
-		if($this->insert = $this->mysqli->prepare("INSERT INTO Wishes VALUES(?,?,?,?)") ){
-			$this->insert->bind_param("ssis", $this->md5, 
+		if($this->insert = $this->mysqli->prepare("INSERT INTO Wishes VALUES(?,?,?,?,?,?)") ){
+			$this->insert->bind_param("sssiss", $this->md5, 
 											  $this->UserName, 
+											  $this->wish,
 											  $this->fountainNum,
-											  $this->wish);
+											  $this->fountainName,
+											  $this->fountainLocation
+											  );
 		}
 		else{
 			throw new Exception("Failure to prepare INSERT statement");
@@ -59,11 +68,13 @@ class Model{
 		
 	}
 	
-	public function insert($md5, $UserName, $fountainNum, $wish){
+	public function insert($md5, $UserName, $wish, $fountainNum, $fountainName, $fountainLocation){
 		$this->md5 = $md5;
 		$this->UserName = $UserName;
-		$this->fountainNum = $fountainNum;
 		$this->wish = $wish;
+		$this->fountainNum = $fountainNum;
+		$this->fountainName = $fountainName;
+		$this->fountainLocation = $fountainLocation;
 		$this->insert->execute();
 	}
 	
@@ -73,20 +84,6 @@ class Model{
 		$this->select->fetch(); 
 		return $this->result;
 	}
-	
-	/*public function select2D($md5){
-		$result = $this->select($md5);
-		$data = $result["data"];
-		unset($result["data"]);
-		
-		$array = preg_split("/\\r\\n|\\r|\\n/", $data); 
-		foreach($array as &$value) $value = explode(',', $value);
-		
-		$result["x's"] = count($array);
-		$result["y's"] = count($array[0])-1;
-		
-		return array_merge($result, $array);
-	}*/
 	
 	public function closeConn(){
 		$this->mysqli->close();
