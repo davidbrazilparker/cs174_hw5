@@ -51,6 +51,7 @@ class ChargeView implements view{
 			</body>
 		</html>		
 		<?php 
+		
 	}
 	
 }

@@ -24,31 +24,36 @@ class LandingView implements view{
 		);
 		\Stripe\Stripe::setApiKey($stripe['secret_key']);
 		
-		$lang = "es"; // default
+		$lang = "en"; // default
 		if(isset($_POST["lang"])) $lang = $_POST["lang"];
-		echo "lang: $lang\n<br>";
+		// echo "lang: $lang\n<br>";
 		
 		$rc = putenv("LANG=$lang");
-		if(!$rc) echo "putenv failed";
-		else echo "putenv: ".$rc;
-		echo "\n<br>";
+		// if(!$rc) echo "putenv failed";
+		// else echo "putenv: ".$rc;
+		// echo "\n<br>";
 		
 		$rc = setlocale(LC_ALL, $lang);
-		if(!$rc) echo "setlocale failed";
-		else echo "setLocale: ".$rc;
-		echo "\n<br>";
+		// if(!$rc) echo "setlocale failed";
+		// else echo "setLocale: ".$rc;
+		// echo "\n<br>";
 		
 		// Set the text domain as 'messages'
 		$domain = "messages";
 		$rc = bindtextdomain($domain, "./src/locale"); 
-		if(!$rc) echo "bindtextdomain failed";
-		else echo "bindtextdomain: ".$rc;
-		echo "\n<br>";
+		// if(!$rc) echo "bindtextdomain failed";
+		// else echo "bindtextdomain: ".$rc;
+		// echo "\n<br>";
 		
 		$rc = textdomain($domain);
-		if(!$rc) echo "textdomain failed";
-		else echo "text domain: ".$rc;
-		echo "\n<br>";
+		// if(!$rc) echo "textdomain failed";
+		// else echo "text domain: ".$rc;
+		// echo "\n<br>";
+		
+		$NumEmails = 1;
+		if(isset($_POST["NumEmails"])) $NumEmails = intval($_POST["NumEmails"]);
+		if(isset($_POST["removeEmail"]) and $NumEmails != 1) $NumEmails--;
+		else if(isset($_POST["addEmail"])) $NumEmails++;
 		
 		?>
 		<!DOCTYPE html>
@@ -66,6 +71,13 @@ class LandingView implements view{
 					</select>
 				</form>
 				
+				<?php
+					if(isset($_POST["lang"])){
+						?>
+						<h1 style="color:RED;">Gettext is literally cancer</h1>
+						<?php
+					}
+				?>
 				<h1><?php echo _("Site Title");?></h1>
 				
 				<div class="slideshow-container">
@@ -141,8 +153,25 @@ class LandingView implements view{
 				<br>
 				<br>
 				
-				<div align="CENTER">
-					<form method="post">
+				<div style="text-align: center;">
+				<span>Wish Text</span><br>
+				<textarea form="payButton" name="wishText" rows="15" cols="120" required></textarea><br>
+						
+					<div style="display: inline-block; position: relative; right: -15px;">
+						Email Recipients
+						<?php 
+							for($i = 1; $i <= $NumEmails; $i++){
+								echo "<br><input form=\"payButton\" type=\"text\" name=\"emails[$i]\">";
+							}
+						?>
+					</div>
+					<input type="submit" form="emailAddSub" name="removeEmail" value="X" style="position:relative; right: -15px;"><br>
+					<form id="emailAddSub" method="POST">
+						<input type="submit" name="addEmail" value="Add Another Email"><br>
+						<input type="hidden" name="NumEmails" value="<?php echo $NumEmails;?>">
+					</form>
+					<br>
+					<form method="post" id="payButton">
 						<script src="https://checkout.stripe.com/checkout.js" 
 							class="stripe-button"
 							data-key="<?php echo $stripe['publishable_key']; ?>"

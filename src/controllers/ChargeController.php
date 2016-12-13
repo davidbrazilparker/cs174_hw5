@@ -13,12 +13,22 @@ class ChargeController implements controller{
 
 	public function __construct(){}
 	/**
-	* Creates a LandingView object and has it render the landing page
+	* Send the respective emails and creates a ChargeView object and has it render the landing page
 	*
 	* @return null
 	*/
 	function processRequest(){
-		$lV = new A\views\ChargeView();
-		$lV->render(null);
+		
+		//send emails
+		$subject = "It totally worked";
+		$message = $_POST['wishText'];
+		$headers = 'From: Wish@Fountain.com';
+		foreach ($_POST['emails'] as $value){
+			$to = $value;
+			mail($to, $subject, $message, $headers);
+		}
+		
+		$view = new A\views\ChargeView();
+		$view->render(null);
 	}
 }

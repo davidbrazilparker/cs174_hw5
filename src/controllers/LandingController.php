@@ -18,7 +18,7 @@ class LandingController implements controller{
 	* @return null
 	*/
 	function processRequest(){
-		$lV = new A\views\LandingView();
-		$lV->render(null);
+		$view = new A\views\LandingView();
+		$view->render(null);
 	}
 }
