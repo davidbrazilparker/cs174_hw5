@@ -51,12 +51,11 @@ class ChargeView implements view{
 				<h1>Check out this cool PDF of your wish</h1>
 				<?php 
 					ob_start();
-					$height = 10;
-					$imageNumber = 1;
+					$wish = 'This is my stupid wish';#Get from database
+					$fountain_name = 'fountain_name';#Get from database
+					$fountain_location = 'fountain_location';#Get from database
+					$imageNumber = 1;#Get from database
 					$source = 'src/resources/fountain_' . $imageNumber . '.jpg';
-					$wish = 'This is my stupid wish';
-					$coin = 'coin';
-					$fountain_name = 'fountain_name';
 					$pdf = new \FPDF();
 					$pdf->AddPage();
 					$pdf->SetFont('Arial','B',16);
