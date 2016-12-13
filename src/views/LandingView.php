@@ -48,7 +48,7 @@ class LandingView implements view{
 		<html>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 			<head>
-				<link rel="stylesheet" type="text/css" href="src/styles/style.css">
+				<link rel="stylesheet" media="all" type="text/css" href="src/styles/style.css">
 			</head>
 			<body>
 				<form id="main" name="main" method="POST">
@@ -63,26 +63,26 @@ class LandingView implements view{
 				
 				<div class="slideshow-container">
 
-				<div class="mySlides fade">
-				  <div class="numbertext">1 / 3</div>
-				  <img src="src/resources/fountain_1.jpg" style="width:100%">
-				  <div class="text">Fountain One</div>
-				</div>
+					<div class="mySlides fade">
+					  <div class="numbertext">1 / 3</div>
+					  <img src="src/resources/fountain_1.jpg" style="width:100%">
+					  <div class="text">Fountain One</div>
+					</div>
 
-				<div class="mySlides fade">
-				  <div class="numbertext">2 / 3</div>
-				  <img src="src/resources/fountain_2.jpg" style="width:100%">
-				  <div class="text">Fountain Two</div>
-				</div>
+					<div class="mySlides fade">
+					  <div class="numbertext">2 / 3</div>
+					  <img src="src/resources/fountain_2.jpg" style="width:100%">
+					  <div class="text">Fountain Two</div>
+					</div>
 
-				<div class="mySlides fade">
-				  <div class="numbertext">3 / 3</div>
-				  <img src="src/resources/fountain_3.jpg" style="width:100%">
-				  <div class="text">Fountain Three</div>
-				</div>
+					<div class="mySlides fade">
+					  <div class="numbertext">3 / 3</div>
+					  <img src="src/resources/fountain_3.jpg" style="width:100%">
+					  <div class="text">Fountain Three</div>
+					</div>
 
-				<a class="prev" onclick="plusSlides(-1)">❮</a>
-				<a class="next" onclick="plusSlides(1)">❯</a>
+					<a class="prev" onclick="plusSlides(-1)">❮</a>
+					<a class="next" onclick="plusSlides(1)">❯</a>
 
 				</div>
 				<br>
@@ -92,7 +92,7 @@ class LandingView implements view{
 				  <span class="dot" onclick="currentSlide(2)"></span> 
 				  <span class="dot" onclick="currentSlide(3)"></span> 
 				</div>
-				<div></div>
+				
 				<script>
 					var slideIndex = 1;
 					showSlides(slideIndex);
