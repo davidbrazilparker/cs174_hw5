@@ -8,7 +8,7 @@ define("NS_BASE", "roommates\\hw5\\");
 
 define(NS_BASE . "NS_CONTROLLERS", "roommates\\hw5\\controllers\\");
 
-if(isSet($_POST['stripeToken'])){
+if(isSet($_POST['stripeToken']) or isSet($_GET['hash'])){
 	$controller_class = "ChargeController";
 }
 else{

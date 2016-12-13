@@ -17,27 +17,8 @@ class ChargeView implements view{
 	* @return null
 	*/
 	function render($data){
-		// composer hates global variables
-		$stripe = array(
-		  "secret_key"      => "sk_test_BsMjVbSw0xLVRg4q9kQQvR6w",
-		  "publishable_key" => "pk_test_5mgPuSlosQhka2t9cm07sYTC"
-		);
-		\Stripe\Stripe::setApiKey($stripe['secret_key']);
-		
-		$token  = $_POST['stripeToken'];
-
-		$customer = \Stripe\Customer::create(array(
-			'email'   => 'customer@example.com',
-			'source'  => $token
-		));
-
-		$charge = \Stripe\Charge::create(array(
-			'customer' => $customer->id,
-			'amount'   => 50,
-			'currency' => 'usd'
-		));
-
-		/*href to $_GET URL created from $_POST data*/
+		$mysql = new \roommates\hw5\models\Model();
+		$result = $mysql->select($_GET['hash']);
 		
 		?>
 		<!DOCTYPE html>
@@ -51,10 +32,13 @@ class ChargeView implements view{
 				<h1>Check out this cool PDF of your wish</h1>
 				<?php 
 					ob_start();
+					
+					$userName = $result["UserName"];
+					
 					$height = 10;
-					$imageNumber = 1;
+					$imageNumber = $result["fountain"];
 					$source = 'src/resources/fountain_' . $imageNumber . '.jpg';
-					$wish = 'This is my stupid wish';
+					$wish = $result["wish"];
 					$coin = 'coin';
 					$fountain_name = 'fountain_name';
 					$pdf = new \FPDF();

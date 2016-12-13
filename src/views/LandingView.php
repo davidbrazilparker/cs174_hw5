@@ -123,13 +123,13 @@ class LandingView implements view{
 					function currentSlide(n) {
 					  showSlides(slideIndex = n);
 					  if(n == 1){
-					  	<?php $fountainImg = "src/resources/fountain_1.jpg"; echo $fountainImg;?>
+					  	<?php $fN = 1; $fountainImg = "src/resources/fountain_$fN.jpg"; echo $fountainImg;?>
 					  }
 					  if(n == 2){
-					  	<?php $fountainImg = "src/resources/fountain_2.jpg"; echo $fountainImg;?>
+					  	<?php $fN = 2; $fountainImg = "src/resources/fountain_$fN.jpg"; echo $fountainImg;?>
 					  }
 					  if(n == 3){
-					  	<?php $fountainImg = "src/resources/fountain_3.jpg"; echo $fountainImg;?>
+					  	<?php $fN = 3; $fountainImg = "src/resources/fountain_$fN.jpg"; echo $fountainImg;?>
 					  }
 					}
 
@@ -183,6 +183,7 @@ class LandingView implements view{
 							data-panel-label="Throw {{amount}} Coin"
 							>
 						</script>
+						<input type="hidden" name="fountainNum" value="<?php echo $fN; ?>">
 					</form>
 				</div>
 				
