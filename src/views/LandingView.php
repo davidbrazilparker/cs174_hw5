@@ -110,6 +110,15 @@ class LandingView implements view{
 
 					function currentSlide(n) {
 					  showSlides(slideIndex = n);
+					  if(n == 1){
+					  	<?php $fountainImg = "src/resources/fountain_1.jpg"; echo $fountainImg;?>
+					  }
+					  if(n == 2){
+					  	<?php $fountainImg = "src/resources/fountain_2.jpg"; echo $fountainImg;?>
+					  }
+					  if(n == 3){
+					  	<?php $fountainImg = "src/resources/fountain_3.jpg"; echo $fountainImg;?>
+					  }
 					}
 
 					function showSlides(n) {

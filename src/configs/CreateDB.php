@@ -1,8 +1,10 @@
 <?php 
 namespace roommates\hw5\configs;
 //require_once './vendor/autoload.php';
-
-global $SERVERNAME, $USERNAME, $PASSWORD, $DB;
+$SERVERNAME = "localhost"; 
+$USERNAME = "root"; 
+$PASSWORD = null; 
+define("DB", "hw5");
 
 // Create connection
 $mysqli = new \mysqli($SERVERNAME, $USERNAME, $PASSWORD);
@@ -12,7 +14,7 @@ if ($mysqli->connect_error) {
 } 
 
 // Create database
-$sql = "CREATE DATABASE IF NOT EXISTS " . $DB;
+$sql = "CREATE DATABASE IF NOT EXISTS " . DB;
 if ($mysqli->query($sql) !== TRUE) { 
     echo "Error creating database: " . $mysqli->error;
 } else{
