@@ -41,6 +41,8 @@ class ChargeView implements view{
 					$wish = $result["wish"];
 					$coin = 'coin';
 					$fountain_name = 'fountain_name';
+					$fountain_location = 'fountain_location';#Get from database
+
 					$pdf = new \FPDF();
 					$pdf->AddPage();
 					$pdf->SetFont('Arial','B',16);

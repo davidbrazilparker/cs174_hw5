@@ -156,6 +156,10 @@ class LandingView implements view{
 				<div style="text-align: center;">
 				<span>Wish Text</span><br>
 				<textarea form="payButton" name="wishText" rows="15" cols="120" required></textarea><br>
+				<span>Fountain Name</span><br>
+				<textarea form="payButton" name="wishText" rows="1" cols="50" required></textarea><br>
+				<span>Fountain Location</span><br>
+				<textarea form="payButton" name="wishText" rows="1" cols="50" required></textarea><br>
 						
 					<div style="display: inline-block; position: relative; right: -15px;">
 						Email Recipients
